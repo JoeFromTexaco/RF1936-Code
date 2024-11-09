@@ -1,3 +1,105 @@
+function addDynamicCSS() {
+    var css = `
+        .inner_window_question h3 .mytooltip{
+            background-color: lightskyblue;
+        }
+
+        .mytooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            background-color: lightblue;
+        }
+
+        .mytooltip .mytooltiptext {
+            width: 240px;
+            background-color: lightblue;
+            color: black;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 99;
+            bottom: 20%;
+            left: 20%;
+            margin-left: -90px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border: 1px solid black;
+            pointer-events: none;
+            font-size: 13px !important;
+            line-height: 1.5em !important;
+            font-weight: normal !important;
+            font-style: normal !important;
+        }
+
+        .mytooltip .mytooltiptext img {
+            max-width: 240px;
+            height: auto;
+        }
+
+        .mytooltip:hover .mytooltiptext {
+            opacity: 1;
+            transition-delay: 0.5s;
+        }
+    `;
+
+    var styleElem = document.createElement('style');
+    styleElem.type = 'text/css';
+    
+    styleElem.appendChild(document.createTextNode(css));
+    
+    document.head.appendChild(styleElem);
+}
+
+
+addDynamicCSS();
+
+tooltipList = [
+    {searchString: "Populists", explanationText: "The People's Party was reformed in 1924 by progressive members of the democratic party who opposed President Wilson's intervention in Mexico. Merged with the Democrats in 1931 to form the American Party"},
+    {searchString: "Andrew Mellon", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/MELLON%2C_ANDREW._SECRETARY_LCCN2016860988_%28cropped%29%28d%29.jpg/330px-MELLON%2C_ANDREW._SECRETARY_LCCN2016860988_%28cropped%29%28d%29.jpg> Sitting President of the United States. Useless Bastard"},
+    {searchString: "Senator Long", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/HueyPLongGesture.jpg/330px-HueyPLongGesture.jpg> Huey Long, Governor,  Senator and political boss of Louisiana known for his Share our Wealth program. Architect of the Democratic-Populist Merger. Met an unfortunate end by  an albino Hippo named 'White Charlie' in 1935"},
+    {searchString: "Glass", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Senator_Carter_Glass_of_Virginia.jpg/196px-Senator_Carter_Glass_of_Virginia.jpg> Carter Glass, Virginia Senator and Independent candidate for President, running on a platform of state's rights, pro-segregation and and fiscal conservatism"},
+   {searchString: "Leche", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/c/c2/Gov_Richard_Leche.jpg> Richard Leche, Current Governor of Louisiana handpicked by the Long Machine. Under investigation for tax fraud and embezzling government funds"},
+    {searchString: "Artaud", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Antonin_Artaud_1926.jpg/330px-Antonin_Artaud_1926.jpg> Antonin Artaud, avant-garde artist turned mad dictator of France following the 1934 Revolution. Seeks to reshape Europe in his violent, hyper modernist image"},
+    {searchString: "Kolchak", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Kolchak.jpg/330px-Kolchak.jpg> Regent and autocrat  of the Russia Empire."},
+    {searchString: "Rosa Luxembourg", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Rosa_Luxemburg.jpg/330px-Rosa_Luxemburg.jpg> Leader of the January Revolution in Germany and mother of the GSCR"},
+    {searchString: "GSCR", explanationText: "The German Socialist Council Republic was founded in 1919 following the January Revolution. The World's first and most influential socialist state"},
+    {searchString: "Alcoa Corporation", explanationText: "The Aluminum Company of America,  one of the largest industrial metal producers in the US. A certain President happens to own shares in the company"},
+    {searchString: "Dust Bowl", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Dust_storm_approaching_Stratford%2C_Texas.jpg/1920px-Dust_storm_approaching_Stratford%2C_Texas.jpg> A series of brutal dust storms in the great plains caused by drought and soil erosion"},
+    {searchString: "Ludendorff", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Bundesarchiv_Bild_183-2005-0828-525_Erich_Ludendorff_%28cropped%29%28b%29.jpg/330px-Bundesarchiv_Bild_183-2005-0828-525_Erich_Ludendorff_%28cropped%29%28b%29.jpg> German Field Marshall and dictator of the rump Imperial government in East Prussia. Blames his loss in the Great War on a supposed 'Judeo-Spartacist conspiracy to stab Germany in the back'"},
+    {searchString: "Rotfront", explanationText: "A military alliance of mostly socialist nations lead by Germany"},
+    {searchString: "Wilkie", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Wendell_Willkie_cph.3c02567.jpg/330px-Wendell_Willkie_cph.3c02567.jpg> Sitting Vice President of the United States. Not in the best position"},
+    {searchString: "Muenter bombing", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Senate_Bombing_July_2%2C_1915.jpg/1280px-Senate_Bombing_July_2%2C_1915.jpg> On June 2, 1921, a bomb was detonated in the Senate Chamber, killing Vice President Thomas Marshall. The culprit, Eric Muenter, was a former German spy who blamed American material support of the Entente for his countries' failure in the Great War"},
+     {searchString: "that crook Ferguson", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/James_E._Ferguson.jpg/330px-James_E._Ferguson.jpg> Notoriously corrupt Governor and later First Gentleman of Texas"},
+    {searchString: "World War", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Germanmachineguncrew1918.webp/700px-Germanmachineguncrew1918.webp.png> In 1913, Russia intervention against Bulgaria in defense of Serbia spiraled into a continent spanning war. 7 years of brutal trench warfare lead to a stalemate."},
+    {searchString: "Great War", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Germanmachineguncrew1918.webp/700px-Germanmachineguncrew1918.webp.png> In 1913, Russia intervention against Bulgaria in defense of Serbia spiraled into a continent spanning war. 7 years of brutal trench warfare lead to a stalemate."},
+    {searchString: "Mellonvilles", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Hooverville.jpg.webp/1200px-Hooverville.jpg.webp.png> Shantytown bult by the homeless people in major cities, across the country. Lovingly named after President Mellon thanks to his inaction"},
+    {searchString: "Invisible Empire", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/9/9f/Ku_Klux_Klan_members_and_a_burning_cross%2C_Denver%2C_Colorado%2C_1921.jpg> Some of those who work forces, are the same who burn crosses"},
+    {searchString: "Black Legion", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/1/14/Black_Legion_Uniforms_with_Skull-and-Crossbones_Insignia.png>Loosely organized and highly radical terrorist organization. Somehow makes the KKK look like choir boys,"},
+    {searchString: "J. Edgar Hoover", explanationText: "<img src= https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/J._Edgar_Hoover_cph.3b10753.jpg/1280px-J._Edgar_Hoover_cph.3b10753.jpg> Director of the Bureau of Investigation. A jackass. "},
+    {searchString: "Clifford Walker", explanationText: "<img src= https://upload.wikimedia.org/wikipedia/commons/8/88/GovernorCliffWalker_%283x4%29.jpg> Former Governor of Georgia and Klan member. Murdered on October 2, 1936 in his home in Monroe by the black legion"},
+    {searchString: "a massacre of a local KKK chapter", explanationText: "On September 21, 1936, several armed Black Legion members opened fire ata local Klan meeting in Columbus, Georgia, killing 14 and critically wounding 31"},
+    {searchString: "Pope", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Pius_XII_with_tabard%2C_by_Michael_Pitcairn%2C_1951_%28retouched%29.jpg/330px-Pius_XII_with_tabard%2C_by_Michael_Pitcairn%2C_1951_%28retouched%29.jpg> Pontifex Maximus"},
+    {searchString: "Accelerationists", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Umberto_Boccioni_001.jpg/375px-Umberto_Boccioni_001.jpg> FASTER"},
+    {searchString: "Cannon", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/5/5f/JamesPCannon.jpg> James Cannon, General Secretary of the CPUSA"},
+    {searchString: "Flynn", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Paterson_strike_leaders.jpg/330px-Paterson_strike_leaders.jpg> Elizabeth Gurley Flynn, noted suffragette and Communist"},
+    {searchString: "Al Capone", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Al_Capone_in_1930.jpg/330px-Al_Capone_in_1930.jpg> Noted 'furniture salesman' in Chicago"},
+    {searchString: "February 14, 1929", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/en/thumb/6/65/SaintValentine%27sDayMassacre.jpg/330px-SaintValentine%27sDayMassacre.jpg> Not one's ideal Valentines Day"},
+    {searchString: "'Kerensky", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Alexander_Kerensky_LOC_hec_24462.jpg/800px-Alexander_Kerensky_LOC_hec_24462.jpg> President of remnants of the Russian Republic in ZheltoRossia"},
+    {searchString: "in Spain", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Soldrepteruel1937.jpg/1280px-Soldrepteruel1937.jpg> Here lies half of Spain. It died of the other half- Mariano Jose de Larra"},
+    {searchString: "in Japan.", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Japanese_Special_Naval_Landing_Forces_in_Battle_of_Shanghai_1937.jpg/1024px-Japanese_Special_Naval_Landing_Forces_in_Battle_of_Shanghai_1937.jpg> If the sovereign is easily provoked and fond of resorting to arms, and neglects agricultural and military training, but needlessly ventures into warfare, then ruin is possible- Han Fiezi"},
+    {searchString: "Lerroux", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Alejandro_Lerroux_Garc%C3%ADa.jpg/330px-Alejandro_Lerroux_Garc%C3%ADa.jpg> Alejandro Lerroux, Prime Minister of the Spanish Republic"},
+    {searchString: "Vice President Hoover", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/President_%26_Mrs_Hoover_in_Belvidere_IL_cph.3b12319.jpg/800px-President_%26_Mrs_Hoover_in_Belvidere_IL_cph.3b12319.jpg> Herbert Hoover, former VP and businessman known for his humanitarian work during the World War"},
+    {searchString: "Shah", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Reza_shah_uniform.jpg/330px-Reza_shah_uniform.jpg> Reza Shah Pahlavi, current monarch of Persia."},
+    {searchString: "Sinclair", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/9/90/Upton_Beall_Sinclair_Jr.jpg>  Upton Sinclair, current governor of California. Wrote a book or two back in the day"},
+    {searchString: "Polzi", explanationText: "<https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Adolf_Hitler_1932_%28cropped%29.jpg/180px-Adolf_Hitler_1932_%28cropped%29.jpg> Upton Sinclair, current governor of California. Wrote a book or two back in the say"},
+    {searchString: "fast track", explanationText: "<https://preview.redd.it/1kban23ro4951.jpg?width=500&format=pjpg&auto=webp&s=d268647739126aec48b5d5ec6262ae0f279161d6> Upton Sinclair, current governor of California. Wrote a book or two back in the say"},
+
+
+  
+];
+
 campaignTrail_temp.global_parameter_json = [
     {
         "model": "campaign_trail.global_parameter",
