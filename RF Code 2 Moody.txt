@@ -13,7 +13,7 @@ campaignTrail_temp.questions_json = [
         "pk": 497,
         "fields": {
             "priority": 2,
-            "description": "What do you have to say about incumbent President Andrew Mellon's handling of the current economic crisis?",
+            "description": "What do you have to say about incumbent President Mellon's handling of the current economic crisis?",
             "likelihood": 1
         }
     },
@@ -10773,7 +10773,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 3834,
             "candidate": 116,
-            "answer_feedback": "While Americans want change, many of the communist wing of the JPP are still seen as extremists. Painting the whole party as a machine commanded by the likes Flynn and Browder is a good way to damage Cox's credibility  "
+            "answer_feedback": "While Americans want change, many of the communist wing of the JPP are still seen as extremists. Painting the whole party as a machine commanded by the likes Flynn and Cannon is a good way to damage Cox's credibility  "
         }
     },
     {
@@ -11088,7 +11088,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 3956,
             "candidate": 116,
-            "answer_feedback": "The New York Journal-American a cartoon mocking your heel turn on prohibition, depicting you riding a sailboat in a maelstrom, blown between 2 islands labeled \"wet\" and \"dry\" . \"DAN MOODY- ANY WAY THE WIND BLOWS', reads the title"
+            "answer_feedback": "The New York Journal-American runs a cartoon mocking your heel turn on prohibition, depicting you riding a sailboat in a maelstrom, blown between 2 islands labeled \"wet\" and \"dry\" . \"DAN MOODY- ANY WAY THE WIND BLOWS', reads the title"
         }
     },
     {
@@ -11412,7 +11412,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 3945,
             "candidate": 116,
-            "answer_feedback": "Azaña criticizes the US for not doing more, but by and large Spain is the last thing on Americans' minds right now. "
+            "answer_feedback": "Prime Minister Lerroux criticizes the US for not doing more, but by and large Spain is the last thing on Americans' minds right now. "
         }
     },
     {
@@ -11439,7 +11439,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 13682,
             "candidate": 116,
-            "answer_feedback": "While Britian wanted more, sending humanitarian aid is easier to justify to the American people than sending guns. Former Vice President Hoover has even volunteered his services. "
+            "answer_feedback": "While Britain wanted more, sending humanitarian aid is easier to justify to the American people than sending guns. Former Vice President Hoover has even volunteered his services. "
         }
     },
     {
@@ -11569,6 +11569,68 @@ campaignTrail_temp.answer_feedback_json = [
         }
     }
 ]
+
+function getTooltips(str) {
+    let matches = [];
+
+    tooltipList.forEach((tooltip, index) => {
+        // Adjust the regex to match searchString potentially surrounded by “ and followed by optional punctuation
+       let regex = new RegExp(`(?<=\\b|\\s|^|“)${tooltip.searchString}(?=[.,;!?]?\\b|\\s|”|$)`, 'g');
+
+
+        let match;
+        while ((match = regex.exec(str)) !== null) {
+            matches.push({
+                start: match.index + (match[0].startsWith('“') ? 1 : 0), // Adjust for potential starting “
+                end: match.index + match[0].length - (match[0].endsWith('”') ? 1 : 0) - (match[2] ? 1 : 0), 
+                tooltipIndex: index
+            });
+        }
+    });
+
+    // Sort by starting position; if two start at the same position, longer match comes first
+    matches.sort((a, b) => a.start - b.start || b.end - b.start - (a.end - a.start));
+
+    // Filter out overlaps
+    for (let i = 0; i < matches.length - 1; ) {
+        if (matches[i + 1].start < matches[i].end) {
+            matches.splice(i + 1, 1); // Remove the next match since it overlaps
+        } else {
+            i++; // Move to next match
+        }
+    }
+
+    return matches;
+}
+function applyTooltips(str) {
+    const matches = getTooltips(str);
+    let result = '';
+    let lastIndex = 0;
+
+    matches.forEach(match => {
+        const tooltip = tooltipList[match.tooltipIndex];
+        result += str.slice(lastIndex, match.start);
+        result += `<span class='mytooltip'>${tooltip.searchString}<span class='mytooltiptext'>${tooltip.explanationText}</span></span>`;
+        lastIndex = match.end;
+    });
+
+    result += str.slice(lastIndex); // Add the remainder of the original string
+    return result;
+}
+
+function applyTooltipsToObject(obj) {
+    for (let key in obj) {
+        if (typeof obj[key] === 'string') {
+            obj[key] = applyTooltips(obj[key]);
+        } else if (typeof obj[key] === 'object') {
+            applyTooltipsToObject(obj[key]); // Recursive call
+        }
+    }
+}
+
+applyTooltipsToObject(campaignTrail_temp.questions_json);
+applyTooltipsToObject(campaignTrail_temp.answers_json);
+applyTooltipsToObject(campaignTrail_temp.answer_feedback_json);
 
 campaignTrail_temp.candidate_image_url = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/DanMoody.jpg/330px-DanMoody.jpg";
 campaignTrail_temp.running_mate_image_url = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/AlbenBarkley.jpg/215px-AlbenBarkley.jpg";
