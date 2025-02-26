@@ -440,7 +440,7 @@ campaignTrail_temp.answers_json = [
         "pk": 3833,
         "fields": {
             "question": 504,
-            "description": "Never punch down in politics. Scott may be polling well but our main focus should be defeating Cutting and ensuring Cox does not split the vote;"
+            "description": "Never punch down in politics. Scott may be polling well but our main focus should be defeating Moody and ensuring Cox does not split the vote;"
         }
     },
     {
@@ -472,7 +472,7 @@ campaignTrail_temp.answers_json = [
         "pk": 3838,
         "fields": {
             "question": 505,
-            "description": "Cox is a second banana. Our energy should be focused on Cutting."
+            "description": "Cox is a second banana. Our energy should be focused on Moody."
         }
     },
     {
