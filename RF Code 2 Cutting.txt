@@ -728,7 +728,7 @@ campaignTrail_temp.answers_json = [
         "pk": 3917,
         "fields": {
             "question": 527,
-            "description": "Thos rise in terrorism is a result the breakdown in law and order in the south. We need to strengthen law enforcement in rural areas"
+            "description": "This rise in terrorism is a result the breakdown in law and order in the south. We need to strengthen law enforcement in rural areas"
         }
     },
     {
