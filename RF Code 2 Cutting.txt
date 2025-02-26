@@ -11435,7 +11435,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 3922,
             "candidate": 117,
-            "answer_feedback": "This is a good way to point to the positive accomplishments of your party."
+            "answer_feedback": "This is a relatively safe answer."
         }
     },
     {
@@ -11444,7 +11444,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 3929,
             "candidate": 117,
-            "answer_feedback": "This answer pleases what's left of the isolationists in your party."
+            "answer_feedback": "This answer pleases the isolationists in your party."
         }
     },
     {
