@@ -386,9 +386,7 @@ campaignTrail_temp.candidate_json = [
             "party": "Independent",
             "state": "Virginia",
             "priority": 1,
-            "description": "<p>Virginia Senator and Independent candidate for President, running on a platform of state's rights, pro-segregation and and fiscal conservatism
-
-</p>",
+            "description": "<p>Virginia Senator and Independent candidate for President, running on a platform of state's rights, pro-segregation and and fiscal conservatism</p>",
             "color_hex": "#008060",
             "secondary_color_hex": null,
             "is_active": 0,
