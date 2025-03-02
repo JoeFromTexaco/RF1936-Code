@@ -229,7 +229,7 @@ campaignTrail_temp.candidate_json = [
             "color_hex": "#aba0a0",
             "secondary_color_hex": "#A1FFA1",
             "is_active": 1,
-            "image_url": "https://neverwasmag.com/wp-content/uploads/2020/12/Howard-Scott.jpg",
+            "image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7f/Howard_Scott_at_a_Technocracy_Section_house.jpg/330px-Howard_Scott_at_a_Technocracy_Section_house.jpg",
             "electoral_victory_message": "'",
             "electoral_loss_message": "'",
             "no_electoral_majority_message": "'",
@@ -514,7 +514,7 @@ campaignTrail_temp.running_mate_json = [
     }
 ]
 
-campaignTrail_temp.credits = "Apad1333"
+campaignTrail_temp.credits = "Apad1333. Banner by metheguyTNCT. Based off the Hearts of Iron 4 Mod of the same name"
 
 campaignTrail_temp.opponents_default_json = [
     {
