@@ -229,7 +229,7 @@ campaignTrail_temp.candidate_json = [
             "color_hex": "#aba0a0",
             "secondary_color_hex": "#A1FFA1",
             "is_active": 1,
-            "image_url": "https://i.imgur.com/wKEmvCm.png",
+            "image_url": "https://neverwasmag.com/wp-content/uploads/2020/12/Howard-Scott.jpg",
             "electoral_victory_message": "'",
             "electoral_loss_message": "'",
             "no_electoral_majority_message": "'",
